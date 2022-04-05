@@ -34,8 +34,7 @@
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
       "vue-cli-service lint",
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   },
   "browserslist": [
