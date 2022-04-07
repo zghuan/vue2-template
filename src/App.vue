@@ -5,11 +5,10 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
-  components: {
-  },
+  components: {},
+  created () {},
   watch: {
     $route: function (route) {
       this.$setTitle(route.name)

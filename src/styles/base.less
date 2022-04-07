@@ -1,0 +1,23 @@
+// 文本超出省略
+.ellipsis (@lineNum) {
+  .ellipsis-@{lineNum} {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @lineNum;
+    overflow: hidden;
+  }
+}
+each(range(4), {
+  .ellipsis(@value)
+})
+
+// 字体大小
+@fontSize: 12,14,16,18,20;
+.fs (@fontSize) {
+  .fs-@{fontSize} {
+    font-size: ~'@{fontSize}px'
+  }
+}
+each(@fontSize, {
+  .fs(@value)
+})

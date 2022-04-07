@@ -1,0 +1,1 @@
+export const SET_THEMECOLOR = 'SET_THEMECOLOR'

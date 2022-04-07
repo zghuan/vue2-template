@@ -68,7 +68,7 @@
             class="agreement-checkbox"
             v-model="checked"
             icon-size="14"
-            checked-color="#FF8E1F"
+            checked-color="var(--themeColor)"
           ></van-checkbox>
           <div
             class="agreement-text"
@@ -81,32 +81,51 @@
         </div>
       </van-form>
     </div>
-    <!-- {{openid}} -->
-    <div
+    <!-- <div
       :class="loginbtnClassName"
       @click="handleClick"
     >
       登录
+    </div> -->
+    <div style="margin: 0 20px">
+      <van-button type="primary" size="large" round>登录</van-button>
     </div>
-    <div class="flex-center" style="color: #FF8E1F;font-size: 14px;margin-top: 30px;" @click="silentLogin">游客身份浏览>></div>
+    <div class="flex-center ellipsis-1 fs-16 tourise-color" @click="silentLogin">游客身份浏览></div>
+    <div class="themeBtn fs-12 flex-align flex-center" @click="openThemeShow = true" :style="{'background': themeColor }">{{themeColor}}</div>
+    <van-popup v-model="openThemeShow" position="right" :style="{ height: '100%' }">
+      <div
+      :key="item.id"
+      v-for="item in themeColors"
+      class="flex-align flex-center"
+      @click="changeSkip(item)"
+      :style="{
+        'width': '120px',
+        'height':'40px',
+        'border-radius': '10px',
+        'margin': '5px 10px',
+        'color': '#fff',
+        'background': item
+        }">{{item}}</div>
+    </van-popup>
   </div>
 </template>
 
 <script>
-import { Form, Field, Checkbox } from 'vant'
-
+import { Form, Field, Checkbox, Button, Popup } from 'vant'
+import { mapMutations } from 'vuex'
 export default {
   name: 'TestLogin',
   components: {
+    [Popup.name]: Popup,
+    [Button.name]: Button,
     [Form.name]: Form,
     [Field.name]: Field,
     [Checkbox.name]: Checkbox
   },
   data () {
     return {
-      appId: 'wxe26adb51e4f23eaf',
-      parentCustId: 2485469,
-      openid: '',
+      themeColors: ['#4DC2A5', '#EE9E09', '#72AEE6'],
+      openThemeShow: false,
       fullPath: '/home',
       status: 1,
       num: 60, // 倒计时
@@ -127,6 +146,12 @@ export default {
     }
   },
   computed: {
+    ...mapMutations([
+      'SET_THEMECOLOR'
+    ]),
+    themeColor () {
+      return this.$store.state.themeColor
+    },
     glideClassName () {
       let name = 'title-glide1'
       if (this.status === 0) {
@@ -154,27 +179,18 @@ export default {
     }
   },
   methods: {
-    // 游客静默登录
-    silentLogin () {
+    // 换肤
+    changeSkip (color) {
+      this.$store.commit('SET_THEMECOLOR', color)
+      this.openThemeShow = false
     },
-    getWxOpenId () {},
+    // 游客静默登录
+    silentLogin () {},
     clickTitle (index) {
       this.status = index
     },
     clickCode () {},
-    clickRead (name, title) {
-      // console.log(index)
-      // pdf线上有问题，先预上线使用
-      if (this.$browser.android && window.location.origin.indexOf('stag') > -1) {
-        this.$router.push({
-          path: '/pdf',
-          query: {
-            name,
-            title
-          }
-        })
-        return
-      }
+    clickRead (name) {
       window.open(`${location.origin}/${name}.pdf`)
     },
     handleClick () {
@@ -183,36 +199,34 @@ export default {
     loginSubmit () {}
   },
   mounted () {
-    const { fullPath, status } = this.$route.query
+    const { status } = this.$route.query
     if (status) this.status = Number(status)
-    // this.openid = getCookie('uid') || getCookie('uid_2485469') || ''
-    if (fullPath && decodeURIComponent(fullPath) !== '/') {
-      this.fullPath = fullPath
-    }
-
-    // 开发环境在url上拿openid
-    if (process.env.NODE_ENV === 'development') {
-      this.parentCustId = 84826
-    }
-
-    if (!this.openid && window.location.host.indexOf('localhost') === -1) {
-      this.getWxOpenId()
-    }
-    if (this.openid) {
-      this.loginSubmit()
-    }
   }
 }
 </script>
 
 <style lang="less" scoped>
+.themeBtn {
+  width: 120px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 6px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff
+}
+.tourise-color {
+  margin-top: 30px;
+  color: var(--themeColor);
+}
 .login {
-  // width: 100vw;
+  position: relative;
   min-height: 100vh;
-  background-image: url('http://qnimg.zowoyoo.com/img/84826/1643009646986.png');
+  background-image: url('http://qnimg.zowoyoo.com/img/84826/1648454073272.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-color: #FFE3B2;
+  background-color: #f8f8f9;
   padding-top: 419px;
   padding-bottom: 40px;
   box-sizing: border-box;
@@ -251,7 +265,7 @@ export default {
         bottom: 0;
         width: 79px;
         height: 6px;
-        background: #FF8E1F;
+        background: var(--themeColor);
         border-radius: 3px 3px 0px 0px;
         transition: left 0.3s ease;
       }
@@ -264,7 +278,7 @@ export default {
     }
     .login-form {
       .code-show {
-        color: #FF8E1F;
+        color: var(--themeColor);
       }
       .agreement {
         display: flex;
@@ -280,7 +294,7 @@ export default {
         .agreement-text {
           padding-left: 10px;
           span {
-            color: #FF8E1F;
+            color: var(--themeColor);
           }
         }
       }
@@ -293,7 +307,7 @@ export default {
     align-items: center;
     width: 670px;
     height: 100px;
-    background-image: linear-gradient(to top, #FF8E1F, #FFAC5A);
+    background-image: linear-gradient(to top, var(--themeColor), #FFAC5A);
     box-shadow: 0px 4px 9px 0px rgba(234, 117, 27, 0.3);
     border-radius: 50px;
     margin: 0 auto;

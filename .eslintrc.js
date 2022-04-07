@@ -12,5 +12,7 @@ module.exports = {
   parserOptions: {
     parser: '@babel/eslint-parser'
   },
-  rules: {}
+  rules: {
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+  }
 }
