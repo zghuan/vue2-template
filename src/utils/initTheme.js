@@ -1,6 +1,6 @@
 import store from '../store'
 window.onload = () => {
-  const style = window.sessionStorage.getItem('style')
+  const style = window.sessionStorage.getItem('themeColor')
   if (style) {
     document.body.style.setProperty('--themeColor', style)
   } else {

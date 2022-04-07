@@ -20,7 +20,6 @@
         ref="login-form"
         label-width="60px"
         class="login-form"
-        @submit="loginSubmit"
       >
         <template v-if="status===0">
           <van-field
@@ -81,14 +80,8 @@
         </div>
       </van-form>
     </div>
-    <!-- <div
-      :class="loginbtnClassName"
-      @click="handleClick"
-    >
-      登录
-    </div> -->
     <div style="margin: 0 20px">
-      <van-button type="primary" size="large" round>登录</van-button>
+      <van-button type="primary" size="large" round @click="loginSubmit">{{$t('login')}}</van-button>
     </div>
     <div class="flex-center ellipsis-1 fs-16 tourise-color" @click="silentLogin">游客身份浏览></div>
     <div class="themeBtn fs-12 flex-align flex-center" @click="openThemeShow = true" :style="{'background': themeColor }">{{themeColor}}</div>
@@ -111,11 +104,12 @@
 </template>
 
 <script>
-import { Form, Field, Checkbox, Button, Popup } from 'vant'
+import { Form, Field, Checkbox, Button, Popup, Toast } from 'vant'
 import { mapMutations } from 'vuex'
 export default {
   name: 'TestLogin',
   components: {
+    [Toast.name]: Toast,
     [Popup.name]: Popup,
     [Button.name]: Button,
     [Form.name]: Form,
@@ -193,10 +187,10 @@ export default {
     clickRead (name) {
       window.open(`${location.origin}/${name}.pdf`)
     },
-    handleClick () {
-      this.$refs['login-form'].submit()
-    },
-    loginSubmit () {}
+    // 登陆
+    loginSubmit () {
+      Toast(this.$t('msg', { a: '手机号', b: '验证码' }))
+    }
   },
   mounted () {
     const { status } = this.$route.query
@@ -240,17 +234,14 @@ export default {
     .login-title {
       position: relative;
       display: flex;
-      // width: 100%;
       border-bottom: 1px solid #f1f1f1;
       margin: 0 32px;
-    // padding: 0 35px;
-    // box-sizing: border-box;
       p {
         flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 118px;
+        margin: 20px 0 40px 0;
         font-size: 34px;
         font-weight: 500;
         color: #999999;
