@@ -1,6 +1,10 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  outputDir: 'zgh',
   lintOnSave: true,
-  transpileDependencies: false
+  transpileDependencies: false,
+  configureWebpack: {
+    externals: {
+      'vue-router': 'VueRouter'
+    }
+  }
 })
