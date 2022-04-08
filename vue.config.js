@@ -6,11 +6,16 @@ module.exports = defineConfig({
     port: 80
   },
   configureWebpack: {
+    name: '正在进入...',
     externals: {
       vue: 'Vue',
       vuex: 'Vuex',
       'vue-router': 'VueRouter'
     }
+  },
+  chainWebpack: config => {
+    config.plugins.delete('preload')
+    config.plugins.delete('prefetch')
   },
   css: {
     loaderOptions: {
