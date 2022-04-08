@@ -1,9 +1,12 @@
+
 module.exports = {
   plugins: {
     autoprefixer: {},
     'postcss-pxtorem': {
-      selectorBlackList: ['.van', '.fs'],
-      rootValue: 75, // 75表示750设计稿，37.5表示375设计稿
+      // selectorBlackList: ['.van'],
+      rootValue ({ file }) {
+        return file.indexOf('vant') !== -1 ? 37.5 : 75
+      },
       propList: ['*']
     }
   }

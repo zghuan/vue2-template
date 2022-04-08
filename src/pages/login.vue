@@ -4,13 +4,17 @@
       <div class="login-title">
         <p
           @click="clickTitle(1)"
+          class="fs-36"
           :class="{
+            'fs-40': status === 1,
             active: status === 1
           }"
         >登录</p>
         <p
           @click="clickTitle(0)"
+          class="fs-36"
           :class="{
+            'fs-40': status === 0,
             active: status === 0
           }"
         >绑卡</p>
@@ -24,6 +28,7 @@
         <template v-if="status===0">
           <van-field
             key="1"
+            label-width="90px"
             v-model="cardCode"
             label="兑换码"
             placeholder="请输入兑换码"
@@ -32,6 +37,7 @@
           />
           <van-field
             key="2"
+            label-width="90px"
             v-model="name"
             label="姓名"
             placeholder="请输入姓名"
@@ -41,6 +47,7 @@
         </template>
         <van-field
           key="3"
+          label-width="90px"
           v-model="phone"
           label="手机号"
           type="tel"
@@ -51,6 +58,7 @@
         <van-field
           key="4"
           v-model="code"
+          label-width="90px"
           clearable
           label="验证码"
           placeholder="请输入验证码"
@@ -66,7 +74,7 @@
           <van-checkbox
             class="agreement-checkbox"
             v-model="checked"
-            icon-size="14"
+            icon-size="1.2em"
             checked-color="var(--themeColor)"
           ></van-checkbox>
           <div
@@ -83,8 +91,8 @@
     <div style="margin: 0 20px">
       <van-button type="primary" size="large" round @click="loginSubmit">{{$t('login')}}</van-button>
     </div>
-    <div class="flex-center ellipsis-1 fs-16 tourise-color" @click="silentLogin">游客身份浏览></div>
-    <div class="themeBtn fs-12 flex-align flex-center" @click="openThemeShow = true" :style="{'background': themeColor }">{{themeColor}}</div>
+    <div class="flex-center ellipsis-1 fs-32 tourise-color" @click="silentLogin">游客身份浏览></div>
+    <div class="themeBtn fs-24 flex-align flex-center" @click="openThemeShow = true" :style="{'background': themeColor }">{{themeColor}}</div>
     <van-popup v-model="openThemeShow" position="right" :style="{ height: '100%' }">
       <div
       :key="item.id"
@@ -242,11 +250,9 @@ export default {
         align-items: center;
         justify-content: center;
         margin: 20px 0 40px 0;
-        font-size: 34px;
         font-weight: 500;
         color: #999999;
         &.active {
-          font-size: 40px;
           font-weight: 500;
           color: #333333;
         }
