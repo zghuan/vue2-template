@@ -1,5 +1,21 @@
 <template>
   <div class="login">
+      <span
+        :class="{
+          'lang': true,
+          'language-css': true,
+          'language-css-en': language === 'en'
+        }"
+        :style="languageStyle"
+        @click="clickLanguage"
+      >
+      </span>
+      <div
+        class="themeBtn fs-24 flex-align flex-center"
+        @click="openThemeShow = true"
+        :style="{'background': themeColor }">
+        <van-icon name="arrow-down" />
+      </div>
     <div class="login-box">
       <div class="login-title">
         <p
@@ -92,7 +108,6 @@
       <van-button type="primary" size="large" round @click="loginSubmit">{{$t('login')}}</van-button>
     </div>
     <div class="flex-center ellipsis-1 fs-32 tourise-color" @click="silentLogin">游客身份浏览></div>
-    <div class="themeBtn fs-24 flex-align flex-center" @click="openThemeShow = true" :style="{'background': themeColor }">{{themeColor}}</div>
     <van-popup v-model="openThemeShow" position="right" :style="{ height: '100%' }">
       <div
       :key="item.id"
@@ -112,11 +127,12 @@
 </template>
 
 <script>
-import { Form, Field, Checkbox, Button, Popup, Toast } from 'vant'
+import { Form, Field, Checkbox, Button, Popup, Toast, Icon } from 'vant'
 import { mapMutations } from 'vuex'
 export default {
   name: 'TestLogin',
   components: {
+    [Icon.name]: Icon,
     [Toast.name]: Toast,
     [Popup.name]: Popup,
     [Button.name]: Button,
@@ -148,6 +164,23 @@ export default {
     }
   },
   computed: {
+    languageStyle () {
+      const style = {
+        borderRadius: '50%',
+        borderWidth: '2px',
+        borderStyle: 'solid',
+        color: '#fff',
+        borderColor: 'rgb(255, 255, 255) transparent',
+        borderRightColor: 'transparent',
+        borderLeftColor: 'transparent',
+        transform: `rotate(${this.language === 'en' ? 225 : 45}deg) scale(1)`,
+        transition: '0.3s'
+      }
+      return style
+    },
+    language () {
+      return this.$store.state.lang
+    },
     ...mapMutations([
       'SET_THEMECOLOR'
     ]),
@@ -181,6 +214,11 @@ export default {
     }
   },
   methods: {
+    // 中英文切换
+    clickLanguage () {
+      const lang = this.language === 'en' ? 'zh' : 'en'
+      this.$store.commit('SET_LANG', lang)
+    },
     // 换肤
     changeSkip (color) {
       this.$store.commit('SET_THEMECOLOR', color)
@@ -208,14 +246,54 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.language-css {
+  &::before,
+  &::after {
+    position: absolute;
+    transform: rotate(-45deg);
+    transition: 0.3s;
+    opacity: 0.5;
+  }
+  &::before {
+    content: "En";
+    top: 8px;
+    left: -16px;
+  }
+  &::after {
+    opacity: 1;
+    font-weight: 700;
+    content: "中";
+    bottom: 10px;
+    right: -18px;
+  }
+  &.language-css-en {
+    &::before,
+    &::after {
+      opacity: 0.5;
+      transform: rotate(-225deg);
+    };
+    &::before {
+      opacity: 1;
+      font-weight: 700;
+    }
+  }
+}
+.lang {
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
 .themeBtn {
-  width: 120px;
-  height: 40px;
-  border: 1px solid #fff;
-  border-radius: 6px;
   position: absolute;
   top: 10px;
   right: 10px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 6px;
   color: #fff
 }
 .tourise-color {

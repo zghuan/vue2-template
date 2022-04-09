@@ -1,23 +1,23 @@
+import store from '../store'
 export default class I18n {
   constructor (options = {}) {
-    this.options = options || {
-      locale: 'zh',
-      messages: {}
-    }
+    this.options = options
+    console.log(this, 1111)
   }
 
   $t (str, params) {
+    console.log(this.options.messages, this.options.locale, store.state.lang)
     if (str) {
       let splitStr = ''
       if (str.indexOf('.') > -1) {
         const arr = str.split('.')
-        let obj = { ...this.options.messages[this.options.locale] }
+        let obj = { ...this.options.messages[store.state.lang] }
         arr.forEach(e => {
           obj = obj[e]
         })
         splitStr = obj
       } else {
-        splitStr = this.options.messages[this.options.locale][str]
+        splitStr = this.options.messages[store.state.lang][str]
       }
       if (!splitStr) return str
       if (splitStr && Object.prototype.toString.call(splitStr) === '[object Object]') {
