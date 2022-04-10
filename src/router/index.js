@@ -12,6 +12,11 @@ export default new VueRouter({
       path: '/login',
       name: '登录',
       component: () => import(/* webpackChunkName: "login" */ '../pages/login.vue')
+    },
+    {
+      path: '/home',
+      name: '首页',
+      component: () => import(/* webpackChunkName: "home" */ '../pages/home.vue')
     }
   ]
 })

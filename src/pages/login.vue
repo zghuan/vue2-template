@@ -19,7 +19,7 @@
     <div class="login-box">
       <div class="login-title">
         <p
-          @click="clickTitle(1)"
+          @click="status = 1"
           class="fs-36"
           :class="{
             'fs-40': status === 1,
@@ -27,7 +27,7 @@
           }"
         >登录</p>
         <p
-          @click="clickTitle(0)"
+          @click="status = 0"
           class="fs-36"
           :class="{
             'fs-40': status === 0,
@@ -97,7 +97,7 @@
             class="agreement-text"
             @click="checked = !checked"
           >
-            已经阅读同意
+            {{CONFIG.zgh || '已经阅读同意'}}
             <span @click.stop="clickRead('user', '用户协议')">《用户协议》</span>和<span @click.stop="clickRead('privacy', '隐私政策')">《隐私政策》</span>
             <!-- 首次登录将自动注册 -->
           </div>
@@ -130,7 +130,7 @@
 import { Form, Field, Checkbox, Button, Popup, Toast, Icon } from 'vant'
 import { mapMutations } from 'vuex'
 export default {
-  name: 'TestLogin',
+  name: 'Login',
   components: {
     [Icon.name]: Icon,
     [Toast.name]: Toast,
@@ -142,6 +142,7 @@ export default {
   },
   data () {
     return {
+      CONFIG,
       themeColors: ['#4DC2A5', '#EE9E09', '#72AEE6'],
       openThemeShow: false,
       fullPath: '/home',
@@ -236,6 +237,7 @@ export default {
     // 登陆
     loginSubmit () {
       Toast(this.$t('msg', { a: '手机号', b: '验证码', c: 'alwa：' }))
+      this.$router.push('/home')
     }
   },
   mounted () {

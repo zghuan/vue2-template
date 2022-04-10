@@ -10,6 +10,8 @@ import './styles/flex.less' // flex样式
 import './styles/theme.less' // 主题样式
 import './utils/rem' // rem适配
 import './utils/initTheme' // 初始化主题
+const version = require('../package.json').version
+window.version = version
 Vue.config.productionTip = false
 Vue.use(plugin)
 new Vue({

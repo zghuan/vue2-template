@@ -1,4 +1,10 @@
-// 解析时间日期函数
+import store from '@/store'
+
+/**
+ * 解析时间日期函数
+ * @param {object} time // 时间戳或时间字符串
+ * @param {string} cFormat // 格式化
+ */
 export function parseTime (time, cFormat) {
   time = time || new Date()
   if (arguments.length === 0) {
@@ -39,4 +45,20 @@ export function parseTime (time, cFormat) {
 export function CalculationPrice (f) {
   const num = Math.round(f * 100)
   return num / 100
+}
+
+/**
+ * 自定义样式打印
+ * @param {object} options
+ * @param {string} options.tit 打印标题
+ * @param {string} options.cont 要打印的内容
+ * @param {string?} options.bgColor 内容的背景颜色
+ */
+export function customizeConsole (options) {
+  const settings = [
+    `%c ${options.tit} %c ${options.cont} `,
+    'padding: 1px; border-radius: 3px 0 0 3px; color: #fff; background: #606060;',
+    `padding: 1px; border-radius: 0 3px 3px 0; color: #fff; background: ${options.bgColor || store.state.themeColor};`
+  ]
+  console.info.apply(console.info, settings)
 }

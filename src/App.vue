@@ -8,7 +8,21 @@
 export default {
   name: 'App',
   components: {},
-  created () {},
+  created () {
+    this.$log({
+      tit: '当前版本',
+      cont: window.version
+    })
+    this.$log({
+      tit: '当前语言',
+      cont: this.$store.state.lang
+    })
+    this.$log({
+      tit: '当前主题',
+      cont: this.$store.state.themeColor,
+      bgColor: this.$store.state.themeColor
+    })
+  },
   watch: {
     $route: function (route) {
       this.$setTitle(route.name)

@@ -1,6 +1,6 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: false,
+module.exports = {
+  lintOnSave: process.env.NODE_ENV !== 'production',
+  productionSourceMap: false,
   devServer: {
     host: '0.0.0.0',
     port: 80
@@ -10,12 +10,24 @@ module.exports = defineConfig({
     externals: {
       vue: 'Vue',
       vuex: 'Vuex',
+      axios: 'axios',
       'vue-router': 'VueRouter'
     }
   },
   chainWebpack: config => {
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
+    if (process.env.NODE_ENV === 'production') {
+      config.optimization.minimizer('terser').tap((args) => {
+        args[0].exclude = ['globalConfig'] // 配置文件不被压缩
+        const compress = args[0].terserOptions.compress
+        compress.drop_debugger = true
+        compress.pure_funcs = [
+          'console.log' // 仅指定log清除
+        ]
+        return args
+      })
+    }
   },
   css: {
     loaderOptions: {
@@ -28,4 +40,4 @@ module.exports = defineConfig({
       }
     }
   }
-})
+}
