@@ -2,18 +2,20 @@ import store from '../store'
 /* eslint-disable no-undef */
 axios.defaults.retry = 2
 axios.defaults.retryDelay = 1000
-const baseURL = ''
+const baseURL = 'https://task-api-stag.zowoyoo.com'
 // eslint-disable-next-line
 const service = axios.create({
   baseURL,
-  timeout: 10000
+  timeout: 10000,
+  headers: {
+    authtoken: store.getters.header || '',
+    'Content-type': 'application/json; charset=UTF-8'
+  }
 })
 
 // 添加请求拦截器
 service.interceptors.request.use(config => {
   // 定义全局使用参数
-  config.headers.authtoken = store.getters.header || ''
-  config.headers['Content-type'] = 'application/json; charset=UTF-8'
   return config
 }, error => {
   console.error(error)
