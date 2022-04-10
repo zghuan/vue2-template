@@ -2,11 +2,9 @@ import store from '../store'
 export default class I18n {
   constructor (options = {}) {
     this.options = options
-    console.log(this, 1111)
   }
 
   $t (str, params) {
-    console.log(this.options.messages, this.options.locale, store.state.lang)
     if (str) {
       let splitStr = ''
       if (str.indexOf('.') > -1) {
@@ -25,10 +23,14 @@ export default class I18n {
       }
       if (!params) return splitStr
       let res = ''
-      // splitStr = splitStr.replace(/\s/ig, '')
+      const matchArr = splitStr.match(/\{.*?\}/g)
+      matchArr.forEach((e) => {
+        const reg = new RegExp(`${e}`, 'g')
+        splitStr = splitStr.replace(reg, e.replace(/\s/g, ''))
+      })
       for (const [k, v] of Object.entries(params)) {
         const reg = new RegExp(`{${k}}`, 'g')
-        res = res !== '' ? res.replace(splitStr.match(reg), v) : splitStr.replace(splitStr.match(reg), v)
+        res = res !== '' ? res.replace(reg, v) : splitStr.replace(reg, v)
       }
       return res
     } else {
