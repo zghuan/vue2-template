@@ -2,7 +2,7 @@
   <div>{{CONFIG.zgh}}</div>
 </template>
 <script>
-import { PromiseAlwa } from '../plugins/promise'
+import MyPromise from '../install/Promise'
 export default {
   name: 'Home',
   data () {
@@ -11,24 +11,59 @@ export default {
     }
   },
   created () {
-    new PromiseAlwa((resolve, reject) => {
-      console.log('开始执行executor')
-      resolve('成功')
-      // reject('失败')
-      // setTimeout(() => {
-      //   resolve('成功1')
-      // }, 1000)
-      // setTimeout(() => {
-      //   reject('失败1')
-      // }, 2000)
-    }).then(res => {
-      console.log(res, 'then1')
-      return 'alwa'
-    }).then(res => {
-      console.log(res, 'then2')
-    }).catch(err => {
-      console.log(err, 'catch')
-    })
+    // this.promise1() // 测试1 -> 成功
+    // this.promise2() // 测试2 -> 成功
+    this.promise3() // 测试3
+  },
+  methods: {
+    promise3 () {
+      const p = new MyPromise((resolve, reject) => {
+        // setTimeout(() => {
+        //   resolve(1)
+        // }, 1000)
+        resolve(1)
+      })
+      p.then(res => {
+        return MyPromise.resolve(2)
+      }).then(res => {
+        res.then(r => {
+          console.log(r, 'then1')
+        })
+      })
+    },
+    promise2 () {
+      const p = new MyPromise((resolve, reject) => {
+        // setTimeout(() => {
+        //   resolve(1)
+        // }, 1000)
+        resolve(1)
+      })
+      p.then(res => {
+        console.log(res, 'success')
+        return 'alwa1'
+      }).then(res => {
+        console.log(res, 'then')
+        return 'alwa2'
+      })
+    },
+    promise1 () {
+      new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(1)
+        }, 1000)
+        // resolve(1)
+      }).then(res => {
+        console.log(res, 'success')
+        return 'alwa1'
+      }, err => {
+        console.log(err, 'fail')
+      }).then(res => {
+        console.log(res, 'then')
+        return 'alwa2'
+      }).then(res => {
+        console.log(res, 'then2')
+      })
+    }
   }
 }
 </script>

@@ -17,6 +17,11 @@ export default new VueRouter({
       path: '/home',
       name: '首页',
       component: () => import(/* webpackChunkName: "home" */ '../pages/home.vue')
+    },
+    {
+      path: '/layout',
+      name: '布局',
+      component: () => import(/* webpackChunkName: "home" */ '../pages/layout.vue')
     }
   ]
 })
