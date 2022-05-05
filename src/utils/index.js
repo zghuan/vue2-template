@@ -41,10 +41,13 @@ export function parseTime (time, cFormat) {
 
 /**
  * 解决js计算精度问题 f:计算的价格 如: CalculationPrice(0.1+0.2)
+ * 0.1+0.2=0.3 转化二进制值计算的时候变成了循环
+ * 由于js里IEEE 754进行运算尾数位只能保留n位数字，这就存在误差
+ * 最后结果再->十进制丢失了精度
  */
-export function CalculationPrice (f) {
-  const num = Math.round(f * 100)
-  return num / 100
+export function CalculationPrice (f, multiple = 100) {
+  const num = Math.round(f * multiple)
+  return num / multiple
 }
 
 /**
@@ -61,4 +64,34 @@ export function customizeConsole (options) {
     `padding: 1px; border-radius: 0 3px 3px 0; color: #fff; background: ${options.bgColor || store.state.themeColor};`
   ]
   console.info.apply(console.info, settings)
+}
+
+/**
+ * @description 浅拷贝-只拷贝一层
+ * @param {object} object 复制的源对象
+ * @returns {object} 新拷贝的对象
+*/
+export function easyClone (originObj) {
+  const newObj = {}
+  for (const item in originObj) {
+    newObj[item] = originObj[item]
+  }
+  return newObj
+}
+/**
+ * @description 深拷贝
+ * @param {object} object 复制的源对象
+ * @returns {object} 新拷贝的对象
+*/
+export function deepClone (originObj) {
+  // 如果是对象
+  if (typeof originObj === 'object') {
+    const newObj = Array.isArray(originObj) ? [] : {}
+    for (const item in originObj) {
+      newObj[item] = deepClone(originObj[item])
+    }
+    return newObj
+  } else {
+    return originObj
+  }
 }

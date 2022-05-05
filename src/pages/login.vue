@@ -236,7 +236,7 @@ export default {
     },
     // 登陆
     loginSubmit () {
-      Toast(this.$t('msg', { a: '手机号', b: '验证码', c: 'alwa：' }))
+      // Toast(this.$t('msg', { a: '手机号', b: '验证码', c: 'alwa：' }))
       this.$router.push('/home')
     }
   },

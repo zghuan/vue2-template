@@ -1,21 +1,53 @@
 <template>
-  <div>{{CONFIG.zgh}}</div>
+  <div>全局变量：{{CONFIG.name}}</div>
 </template>
 <script>
-import MyPromise from '../install/Promise'
+import MyPromise from '../interview/Promise'
+import { easyClone, deepClone } from '../utils'
+import { Sones6, Sones5 } from '../interview/extend'
 export default {
   name: 'Home',
   data () {
     return {
-      CONFIG
+      CONFIG,
+      originObj: {
+        a: 1,
+        b: {
+          c: 3
+        },
+        e: [1, 2, 3],
+        f: function () {
+          console.log(666)
+        }
+      }
     }
   },
   created () {
-    // this.promise1() // 测试1 -> 成功
-    // this.promise2() // 测试2 -> 成功
-    this.promise3() // 测试3
+    // this.protoExtend() // 测试原型继承
+    // this.testPromise() // 测试promise
+    // this.testClone() // 测试深浅拷贝
   },
   methods: {
+    protoExtend () {
+      const res = new Sones6()
+      console.log(res.getInfo().name, 'es6继承')
+      const res2 = new Sones5()
+      console.log(res2.getInfo().name, 'es5继承')
+    },
+    testClone () {
+      const res1 = easyClone(this.originObj)
+      const res2 = deepClone(this.originObj)
+      this.originObj.a = 2
+      this.originObj.b.c = 4
+      this.originObj.e[0] = 'zgh'
+      console.log(res1, '浅拷贝')
+      console.log(res2, '深拷贝')
+    },
+    testPromise () {
+      this.promise1() // 测试1 -> 成功
+      this.promise2() // 测试2 -> 成功
+      this.promise3() // 测试3
+    },
     promise3 () {
       const p = new MyPromise((resolve, reject) => {
         // setTimeout(() => {
