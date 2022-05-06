@@ -1,17 +1,25 @@
 <template>
   <div class="grid">
+    <div class="space-around">
+      <span v-anchor="'grid1'">常见宫格</span>
+      <span v-anchor="'grid2'">特殊布局</span>
+      <span v-anchor="'grid3'">自动布局</span>
+      <span v-anchor="'grid4'">瀑布流</span>
+    </div>
     <!-- 常见宫格 -->
-    <div class="grid1">
+    <div class="grid1" v-loading="loading">
       <template v-for="item in n">
         <div class="item1 flex-align flex-center" :key="item">{{item}}</div>
       </template>
     </div>
+    <button @click="loading = !loading">loading</button>
     <!-- 特殊布局 -->
-    <div class="grid2">
+    <div class="grid2" >
       <template v-for="item in n2">
         <div class="item2 flex-align flex-center" :class="'area' + item" :key="item">{{item}}</div>
       </template>
     </div>
+    <button @click="openToast">js调用</button>
     <!-- 自动布局算法 -->
     <div class="grid3">
       <template v-for="item in n">
@@ -41,6 +49,7 @@ export default {
   name: 'Grid',
   data () {
     return {
+      loading: false,
       n: 8,
       n2: 6,
       list: [...(new Array(10)).keys()]
@@ -50,6 +59,9 @@ export default {
     window.addEventListener('scroll', this.scrollBottom)
   },
   methods: {
+    openToast () {
+      this.$Toast('加载呀~')
+    },
     scrollBottom () {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
       const windowHeight = document.documentElement.clientHeight || document.body.clientHeight
@@ -71,6 +83,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  .grid {
+    padding: 10px 0;
+  }
   .grid1 {
     display: grid;
     margin: 20px;

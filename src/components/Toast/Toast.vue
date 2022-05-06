@@ -21,7 +21,7 @@ export default {
     // z-index值
     zIndex: {
       type: [Number, String],
-      default: ''
+      default: '999'
     },
     value: {
       type: Boolean,

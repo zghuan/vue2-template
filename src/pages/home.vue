@@ -1,19 +1,14 @@
 <template>
   <div class="home">
     <div>全局变量：{{CONFIG.name}}</div>
-    <button @click="openToast">加载</button>
   </div>
 </template>
 <script>
 import MyPromise from '../interview/Promise'
 import { easyClone, deepClone } from '../utils'
 import { Sones6, Sones5 } from '../interview/extend'
-// import Toast from '../components/Toast'
 export default {
   name: 'Home',
-  components: {
-    // Toast
-  },
   data () {
     return {
       show: false,
@@ -36,9 +31,6 @@ export default {
     // this.testClone() // 测试深浅拷贝
   },
   methods: {
-    openToast () {
-      this.$Toast('加载呀~')
-    },
     protoExtend () {
       const res = new Sones6()
       console.log(res.getInfo().name, 'es6继承')
