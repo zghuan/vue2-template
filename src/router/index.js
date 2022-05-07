@@ -22,6 +22,11 @@ export default new VueRouter({
       path: '/layout',
       name: '布局',
       component: () => import(/* webpackChunkName: "home" */ '../pages/layout.vue')
+    },
+    {
+      path: '/topics',
+      name: '发布大厅',
+      component: () => import(/* webpackChunkName: "topics" */ '../pages/topics.vue')
     }
   ]
 })

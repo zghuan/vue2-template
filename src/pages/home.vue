@@ -1,6 +1,8 @@
 <template>
   <div class="home">
     <div>全局变量：{{CONFIG.name}}</div>
+    <button @click="go('/layout')">布局</button>
+    <button @click="go('/topics')">观察者模式</button>
   </div>
 </template>
 <script>
@@ -31,6 +33,9 @@ export default {
     // this.testClone() // 测试深浅拷贝
   },
   methods: {
+    go (path) {
+      this.$router.push(path)
+    },
     protoExtend () {
       const res = new Sones6()
       console.log(res.getInfo().name, 'es6继承')
@@ -102,3 +107,8 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+  .home {
+    padding: 10px;
+  }
+</style>

@@ -97,7 +97,7 @@
             class="agreement-text"
             @click="checked = !checked"
           >
-            {{CONFIG.zgh || '已经阅读同意'}}
+            '已经阅读同意'
             <span @click.stop="clickRead('user', '用户协议')">《用户协议》</span>和<span @click.stop="clickRead('privacy', '隐私政策')">《隐私政策》</span>
             <!-- 首次登录将自动注册 -->
           </div>

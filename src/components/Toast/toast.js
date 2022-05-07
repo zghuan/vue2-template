@@ -7,7 +7,6 @@ const Toast = (text) => {
   const ToastInstance = new ToastConstructor()
   ToastInstance.id = id
   const vm = ToastInstance.$mount()
-  console.log(vm, 'vm')
   vm.text = text
   vm.value = true
   document.body.appendChild(vm.$el)
