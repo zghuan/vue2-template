@@ -12,6 +12,15 @@ module.exports = {
       vuex: 'Vuex',
       axios: 'axios',
       'vue-router': 'VueRouter'
+    },
+    module: {
+      rules: [{
+        test: /\.md$/,
+        use: [
+          'babel-loader',
+          './loader/md-loader.js'
+        ]
+      }]
     }
   },
   chainWebpack: config => {

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import customRoutes from './customRoutes.js'
 Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
@@ -27,6 +28,7 @@ export default new VueRouter({
       path: '/topics',
       name: '发布大厅',
       component: () => import(/* webpackChunkName: "topics" */ '../pages/topics.vue')
-    }
+    },
+    ...customRoutes
   ]
 })

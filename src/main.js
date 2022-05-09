@@ -12,7 +12,7 @@ import './utils/rem' // rem适配
 import './utils/initTheme' // 初始化主题
 import './directives/index' // 注册全局指令
 import Toast from './components/Toast/toast.js' // js调用components
-import './interview/pub-sub.js'
+import './interview/pub-sub.js' // 发布订阅模式
 Vue.use(Toast)
 const version = require('../package.json').version
 window.version = version
