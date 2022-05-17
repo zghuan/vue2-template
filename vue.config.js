@@ -1,3 +1,4 @@
+const FileListPlugin = require('./webpackPlugin/fileList.js')
 module.exports = {
   lintOnSave: process.env.NODE_ENV !== 'production',
   productionSourceMap: false,
@@ -17,11 +18,15 @@ module.exports = {
       rules: [{
         test: /\.md$/,
         use: [
-          'babel-loader',
           './loader/md-loader.js'
         ]
       }]
-    }
+    },
+    plugins: [
+      new FileListPlugin({
+        filename: 'alwa.md'
+      })
+    ]
   },
   chainWebpack: config => {
     config.plugins.delete('preload')
