@@ -29,6 +29,11 @@ export default new VueRouter({
       name: '发布大厅',
       component: () => import(/* webpackChunkName: "topics" */ '../pages/topics.vue')
     },
+    {
+      path: '/list',
+      name: '产品布局生成器',
+      component: () => import(/* webpackChunkName: "list" */ '../pages/list.vue')
+    },
     ...customRoutes
   ]
 })
