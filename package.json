@@ -36,7 +36,7 @@
   },
   "gitHooks": {
     "pre-commit": " lint-staged",
-    "pre-push": "npm version patch -m 'version'"
+    "pre-push": "npm version patch"
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
