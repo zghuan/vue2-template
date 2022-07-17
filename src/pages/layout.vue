@@ -14,7 +14,7 @@
     </div>
     <div class="functional">
       <button @click="loading = !loading">自定义loading</button>
-      <button @click="openToast">js调用toast</button>
+      <button @click="openToast('alwa')">js调用toast</button>
     </div>
     <!-- 特殊布局 -->
     <div class="grid2" >
@@ -48,11 +48,12 @@
   </div>
 </template>
 <script>
-import { throttle } from '@/utils'
+import { throttle, debounce } from '@/utils'
 export default {
   name: 'Grid',
   data () {
     return {
+      debounce,
       loading: false,
       n: 8,
       n2: 6,
@@ -60,15 +61,18 @@ export default {
     }
   },
   mounted () {
-    window.addEventListener('scroll', this.scrollBottom)
+    // 节流测试
+    window.addEventListener('scroll', throttle((e) => {
+      console.log(e)
+      this.scrollBottom()
+    }, 500))
   },
   methods: {
-    openToast () {
-      throttle(() => {
-        console.log(this)
-        this.$Toast('加载呀~')
-      }, 500)
-    },
+    // 防抖测试
+    openToast: debounce(function (e) {
+      console.log(e)
+      this.$Toast('加载呀~')
+    }, 500),
     scrollBottom () {
       console.log('scroll')
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop

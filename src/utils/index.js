@@ -104,7 +104,7 @@ export function debounce (fn, delay) {
       clearTimeout(timer)
     }
     timer = setTimeout(() => {
-      fn.call(this)
+      fn.apply(this, arguments)
     }, delay)
   }
 }
@@ -115,7 +115,7 @@ export function throttle (fn, delay) {
   return function () {
     if (flag) {
       setTimeout(() => {
-        fn.call(this)
+        fn.apply(this, arguments)
         flag = true
       }, delay)
     }
