@@ -122,3 +122,26 @@ export function throttle (fn, delay) {
     flag = false
   }
 }
+
+/**
+ * @description 复制
+ * @param {string} content 复制的内容
+*/
+export function copyContent (content) {
+  const oInput = document.createElement('input')
+  oInput.value = content
+  oInput.readOnly = 'readOnly'
+  oInput.style.position = 'absolute'
+  oInput.style.left = '-1000px'
+  oInput.style.zIndex = '-1000'
+  document.body.appendChild(oInput)
+  oInput.select()
+  if (!document.execCommand('copy')) {
+    oInput.setSelectionRange(0, oInput.value.length)
+    document.execCommand('Copy')
+  } else {
+    document.execCommand('copy')
+  }
+  document.body.removeChild(oInput)
+  return true
+}
