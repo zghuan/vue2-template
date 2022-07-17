@@ -10,5 +10,5 @@ module.exports = function (source) {
       'padding: 1px; border-radius: 3px; color: #fff; background: orange'
     ])\n`
   })
-  return res
+  return this.callback(null, res)
 }
