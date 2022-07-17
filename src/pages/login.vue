@@ -226,7 +226,9 @@ export default {
       this.openThemeShow = false
     },
     // 游客静默登录
-    silentLogin () {},
+    silentLogin () {
+      this.$router.push('/home')
+    },
     clickTitle (index) {
       this.status = index
     },

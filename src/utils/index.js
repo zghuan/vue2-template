@@ -95,3 +95,30 @@ export function deepClone (originObj) {
     return originObj
   }
 }
+
+// 防抖-事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。
+export function debounce (fn, delay) {
+  let timer = null
+  return function () {
+    if (timer !== null) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      fn.call(this)
+    }, delay)
+  }
+}
+
+// 节流-减少一段时间内事件的触发频率
+export function throttle (fn, delay) {
+  let flag = true
+  return function () {
+    if (flag) {
+      setTimeout(() => {
+        fn.call(this)
+        flag = true
+      }, delay)
+    }
+    flag = false
+  }
+}

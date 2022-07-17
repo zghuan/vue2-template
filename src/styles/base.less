@@ -21,3 +21,20 @@ each(range(4), {
 each(@fontSize, {
   .fs(@value)
 })
+
+// fixed
+.fixed (@top) {
+  .fixed-@{top} {
+    z-index: 999;
+    height: 60px;
+    background: #f8f8f9;
+    width: 100%;
+    position: fixed;
+    top: @top;
+    left: 0;
+  }
+}
+@top: 0,10;
+each(@top, {
+  .fixed(@value)
+})

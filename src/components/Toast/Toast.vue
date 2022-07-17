@@ -84,7 +84,7 @@ export default {
   font-size: 14px;
   opacity: 0;
   pointer-events: none;
-  padding: 9px 20px;
+  padding: 15px 20px;
 }
 
 .u-toast.u-show {

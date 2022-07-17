@@ -1,6 +1,6 @@
 <template>
   <div class="grid">
-    <div class="space-around">
+    <div class="space-around flex-align fixed-0">
       <span v-anchor="'grid1'">常见宫格</span>
       <span v-anchor="'grid2'">特殊布局</span>
       <span v-anchor="'grid3'">自动布局</span>
@@ -12,14 +12,17 @@
         <div class="item1 flex-align flex-center" :key="item">{{item}}</div>
       </template>
     </div>
-    <button @click="loading = !loading">loading</button>
+    <div class="functional">
+      <button @click="loading = !loading">自定义loading</button>
+      <button @click="openToast">js调用toast</button>
+    </div>
     <!-- 特殊布局 -->
     <div class="grid2" >
       <template v-for="item in n2">
         <div class="item2 flex-align flex-center" :class="'area' + item" :key="item">{{item}}</div>
       </template>
     </div>
-    <button @click="openToast">js调用</button>
+
     <!-- 自动布局算法 -->
     <div class="grid3">
       <template v-for="item in n">
@@ -45,6 +48,7 @@
   </div>
 </template>
 <script>
+import { throttle } from '@/utils'
 export default {
   name: 'Grid',
   data () {
@@ -60,9 +64,13 @@ export default {
   },
   methods: {
     openToast () {
-      this.$Toast('加载呀~')
+      throttle(() => {
+        console.log(this)
+        this.$Toast('加载呀~')
+      }, 500)
     },
     scrollBottom () {
+      console.log('scroll')
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
       const windowHeight = document.documentElement.clientHeight || document.body.clientHeight
       const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
@@ -88,7 +96,7 @@ export default {
   }
   .grid1 {
     display: grid;
-    margin: 20px;
+    margin: 50px 20px 20px 20px;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
     .item1 {
@@ -161,6 +169,12 @@ export default {
       border-radius: 10px;
       margin-bottom: 20px;
       background: var(--themeColor);
+    }
+  }
+  .functional {
+    margin: 0 20px;
+    button + button {
+      margin-left: 10px;
     }
   }
 </style>

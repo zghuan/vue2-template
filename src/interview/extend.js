@@ -25,13 +25,14 @@ function Parentes5 () {
   this.name = 'alwa-es5'
 }
 
-Parentes5.prototype.getMame = function () {
+Parentes5.prototype.getName = function () {
   return this.name
 }
 
 function Sones5 () {
   this.age = 19
 }
+// 继承核心
 Sones5.prototype = new Parentes5()
 Sones5.prototype.getInfo = function () {
   return this

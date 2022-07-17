@@ -8,7 +8,7 @@ export default {
       } else {
         try {
           const element = document.querySelector(`.${binding.value}`) || document.getElementById(`${binding.value}`)
-          total = element.offsetTop
+          total = element.offsetTop - 30
         } catch (e) {
           console.error('找不到元素')
         }
