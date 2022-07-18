@@ -28,6 +28,7 @@ export default {
     }
   },
   created () {
+    this.$root.name = '曾'
     // this.protoExtend() // 测试原型继承
     // this.testPromise() // 测试promise
     // this.testClone() // 测试深浅拷贝

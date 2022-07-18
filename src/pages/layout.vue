@@ -61,6 +61,7 @@ export default {
     }
   },
   mounted () {
+    console.log(this.$root.name, 111)
     // 节流测试
     window.addEventListener('scroll', throttle((e) => {
       console.log(e)

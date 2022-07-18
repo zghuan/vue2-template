@@ -22,6 +22,7 @@ export default {
     }
   },
   created () {
+    console.log(this.$root.name, 222)
     // 实例化主题
     this.subject = subject
   },

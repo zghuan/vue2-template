@@ -18,7 +18,13 @@ const version = require('../package.json').version
 window.version = version
 Vue.config.productionTip = false
 Vue.use(plugin)
+// 根实例
 new Vue({
+  data () {
+    return {
+      name: 'alwa'
+    }
+  },
   router,
   store,
   i18n,
