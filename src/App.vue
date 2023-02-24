@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <configProvider>
+      <router-view></router-view>
+    </configProvider>
   </div>
 </template>
 
 <script>
+import configProvider from './components/ConfigProvider/ConfigProvider'
 export default {
   name: 'App',
-  components: {},
+  components: {
+    configProvider
+  },
   created () {
     this.$log({
       tit: '当前版本',
