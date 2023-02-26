@@ -6,13 +6,14 @@ module.exports = {
     host: '0.0.0.0',
     port: 80
   },
+  runtimeCompiler: true, // 运行时+编译器
   configureWebpack: {
     name: '正在进入...',
     externals: {
-      vue: 'Vue',
-      vuex: 'Vuex',
-      axios: 'axios',
-      'vue-router': 'VueRouter'
+      // vue: 'Vue',
+      // vuex: 'Vuex',
+      axios: 'axios'
+      // 'vue-router': 'VueRouter'
     },
     module: {
       rules: [{

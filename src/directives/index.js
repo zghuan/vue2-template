@@ -1,4 +1,5 @@
 /* eslint-disable */
+import Vue from 'vue'
 export default ((vue) => {
   const requireJs = require.context('.', false, /\.js$/)
   requireJs.keys().forEach(keys => {

@@ -19,7 +19,8 @@ window.version = version
 Vue.config.productionTip = false
 Vue.use(plugin)
 // 根实例
-new Vue({
+export default new Vue({
+  el: '#app',
   data () {
     return {
       name: 'alwa'
@@ -28,5 +29,6 @@ new Vue({
   router,
   store,
   i18n,
-  render: h => h(App)
-}).$mount('#app')
+  components: { App },
+  template: '<App />'
+})
