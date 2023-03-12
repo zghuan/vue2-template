@@ -25,7 +25,8 @@ module.exports = {
     },
     plugins: [
       new FileListPlugin({
-        filename: 'alwa.md'
+        filename: 'alwa.md',
+        exclude: ['html'] // 排除记录的文件
       })
     ]
   },
@@ -33,6 +34,8 @@ module.exports = {
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
     if (process.env.NODE_ENV === 'production') {
+      // config.plugin('webpack-bundle-analyzer')
+      //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
       config.optimization.minimizer('terser').tap((args) => {
         args[0].exclude = ['globalConfig'] // 配置文件不被压缩
         const compress = args[0].terserOptions.compress

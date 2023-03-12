@@ -1,13 +1,14 @@
 export default {
   name: 'config-provider',
-  abstract: true,
+  abstract: true, // 抽象组件
   props: ['name'],
   created () {
+    console.log('name:', this.name)
   },
   render (h) {
-    console.log(this.name, 111)
-    const slot = this.$slots.default
-    return h('div', {
-    }, slot || slot[0])
+    const slot = this.$slots.default && this.$slots.default[0]
+    if (slot) {
+      return slot
+    }
   }
 }

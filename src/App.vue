@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <configProvider>
+    <configProvider name="alwa">
       <router-view></router-view>
     </configProvider>
   </div>
