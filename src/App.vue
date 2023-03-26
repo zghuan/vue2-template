@@ -14,6 +14,8 @@ export default {
     configProvider
   },
   created () {
+    // 测试babel
+    debugger
     this.$log({
       tit: '当前版本',
       cont: window.version

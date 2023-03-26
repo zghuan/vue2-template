@@ -39,7 +39,7 @@ module.exports = {
       config.optimization.minimizer('terser').tap((args) => {
         args[0].exclude = ['globalConfig'] // 配置文件不被压缩
         const compress = args[0].terserOptions.compress
-        compress.drop_debugger = true
+        // compress.drop_debugger = true
         compress.pure_funcs = [
           'console.log' // 仅指定log清除
         ]

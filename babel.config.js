@@ -1,3 +1,4 @@
+
 module.exports = {
   presets: [
     '@vue/cli-plugin-babel/preset'
@@ -7,6 +8,7 @@ module.exports = {
       libraryName: 'vant',
       libraryDirectory: 'es',
       style: (name) => `${name}/style/less`
-    }, 'vant']
+    }, 'vant'],
+    [require('./babel/debugger-console')]
   ]
 }
