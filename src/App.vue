@@ -14,8 +14,13 @@ export default {
     configProvider
   },
   created () {
+    console.log(process.env.MODE)
     // 测试babel
     debugger
+    this.$log({
+      tit: '渲染模式',
+      cont: process.env.MODE
+    })
     this.$log({
       tit: '当前版本',
       cont: window.version
