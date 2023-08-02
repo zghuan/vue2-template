@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div>全局变量：{{CONFIG.name}}</div>
+    <!-- <div>全局变量：{{CONFIG.name}}</div> -->
     <button @click="go('/layout')">布局</button>
     <button @click="go('/topics')" >观察者模式</button>
   </div>
@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       show: false,
-      CONFIG,
+      // CONFIG,
       originObj: {
         a: 1,
         b: {

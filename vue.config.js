@@ -1,4 +1,8 @@
 const FileListPlugin = require('./webpackPlugin/fileList.js')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const path = require('path')
+const PrerenderSPAPlugin = require('@dreysolano/prerender-spa-plugin')
+const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 module.exports = {
   lintOnSave: process.env.NODE_ENV !== 'production',
   productionSourceMap: false,
@@ -27,6 +31,20 @@ module.exports = {
       new FileListPlugin({
         filename: 'alwa.md',
         exclude: ['html'] // 排除记录的文件
+      }),
+      new CleanWebpackPlugin(),
+      process.env.NODE_ENV === 'production' && new PrerenderSPAPlugin({
+        staticDir: path.join(__dirname, 'dist'),
+        routes: ['/home', '/layout'], // 你需要预渲染的路由
+        renderer: new Renderer({
+          inject: {
+            _m: 'prerender'
+          },
+          // 渲染时显示浏览器窗口，调试时有用
+          headless: false,
+          // 等待触发目标时间后，开始预渲染
+          renderAfterDocumentEvent: 'render-event'
+        })
       })
     ]
   },

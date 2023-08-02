@@ -5,9 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "pre-build": "vue-cli-service build",
     "lint": "eslint --fix && vue-cli-service lint"
   },
   "dependencies": {
+    "@dreysolano/prerender-spa-plugin": "^1.0.3",
+    "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.8.3",
     "marked": "^4.0.15",
     "vant": "2",
