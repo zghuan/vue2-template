@@ -97,7 +97,7 @@
             class="agreement-text"
             @click="checked = !checked"
           >
-            '已经阅读同意'
+            已经阅读同意
             <span @click.stop="clickRead('user', '用户协议')">《用户协议》</span>和<span @click.stop="clickRead('privacy', '隐私政策')">《隐私政策》</span>
             <!-- 首次登录将自动注册 -->
           </div>
@@ -108,6 +108,8 @@
       <van-button type="primary" size="large" round @click="loginSubmit">{{$t('login')}}</van-button>
     </div>
     <div class="flex-center ellipsis-1 fs-32 tourise-color" @click="silentLogin">游客身份浏览></div>
+    <div class="flex-center ellipsis-1 fs-32 tourise-color" @click="resetData">重置data数据></div>
+
     <van-popup v-model="openThemeShow" position="right" :style="{ height: '100%' }">
       <div
       :key="item.id"
@@ -229,6 +231,10 @@ export default {
     silentLogin () {
       this.$router.push('/home')
     },
+    // 重置-还原初始data状态，不需要一个一个手动赋值清空
+    resetData () {
+      Object.assign(this.$data, this.$options.data())
+    },
     clickTitle (index) {
       this.status = index
     },
@@ -238,7 +244,7 @@ export default {
     },
     // 登陆
     loginSubmit () {
-      // Toast(this.$t('msg', { a: '手机号', b: '验证码', c: 'alwa：' }))
+      Toast(this.$t('msg', { a: '手机号', b: '验证码', c: 'alwa：' }))
       this.$router.push('/home')
     }
   },

@@ -14,7 +14,6 @@ export default {
     configProvider
   },
   created () {
-    console.log(process.env.MODE)
     // 测试babel
     debugger
     this.$log({
