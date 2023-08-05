@@ -7,6 +7,7 @@ const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 console.log(process.env.MODE)
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production' ? '/vue2-template' : '/',
   lintOnSave: process.env.NODE_ENV !== 'production',
   productionSourceMap: false,
   devServer: {
