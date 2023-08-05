@@ -11,7 +11,7 @@ VueRouter.prototype.push = function push (location) {
   }
 }
 export default new VueRouter({
-  mode: 'history',
+  mode: process.env.MODE === 'pre' ? 'history' : 'hash', // 预渲染要求history，github-pages要hash才能查看
   routes: [
     {
       path: '/',
