@@ -11,7 +11,7 @@ VueRouter.prototype.push = function push (location) {
   }
 }
 export default new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',
