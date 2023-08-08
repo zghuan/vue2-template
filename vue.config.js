@@ -18,8 +18,9 @@ module.exports = {
   configureWebpack: (config) => {
     config.name = '正在进入...'
     config.externals = {
-      // vue: 'Vue',
+      vue: 'Vue',
       // vuex: 'Vuex',
+      uw: 'z-uw',
       axios: 'axios'
       // 'vue-router': 'VueRouter'
     }

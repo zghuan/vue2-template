@@ -6,7 +6,6 @@ import plugin from './plugins/index' // 全局方法
 import i18n from './i18n' // 多语言
 // import Vant from 'vant'
 // import 'vant/lib/index.css'
-
 import './styles/reset.less' // 重置样式
 import './styles/base.less' // 基础样式
 import './styles/flex.less' // flex样式
@@ -23,6 +22,8 @@ const version = require('../package.json').version
 window.version = version
 Vue.config.productionTip = false
 Vue.use(plugin)
+// eslint-disable-next-line no-undef
+Vue.use(uw)
 // 根实例
 export default new Vue({
   el: '#app',

@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <z-nav-bar title="我是zui组件"></z-nav-bar>
     <!-- <div>全局变量：{{CONFIG.name}}</div> -->
     <button @click="go('/layout')">布局</button>
     <button @click="go('/topics')" >观察者模式</button>
@@ -11,6 +12,9 @@ import { easyClone, deepClone } from '../utils'
 import { Sones6, Sones5 } from '../interview/extend'
 export default {
   name: 'Home',
+  components: {
+
+  },
   data () {
     return {
       show: false,
