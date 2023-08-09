@@ -23,7 +23,8 @@ window.version = version
 Vue.config.productionTip = false
 Vue.use(plugin)
 // eslint-disable-next-line no-undef
-Vue.use(uw)
+const zui = 'z-ui'
+Vue.use(zui)
 // 根实例
 export default new Vue({
   el: '#app',

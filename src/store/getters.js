@@ -1,3 +1,3 @@
 export const themeColor = state => state.themeColor
-export const lang = state => state.lang
+export const language = state => state.language
 export const header = state => state.header

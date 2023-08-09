@@ -25,7 +25,7 @@
             'fs-40': status === 1,
             active: status === 1
           }"
-        >登录</p>
+        >{{$t('login')}}</p>
         <p
           @click="status = 0"
           class="fs-36"
@@ -33,7 +33,7 @@
             'fs-40': status === 0,
             active: status === 0
           }"
-        >绑卡</p>
+        >{{$t('bindCard')}}</p>
         <s :class="['title-glide', glideClassName]"></s>
       </div>
       <van-form
@@ -64,27 +64,26 @@
         <van-field
           key="3"
           label-width="90px"
-          v-model="phone"
-          label="手机号"
+          v-model="username"
+          :label="$t('username')"
           type="tel"
-          placeholder="请输入手机号"
+          placeholder="请输入用户名"
           clearable
-          :rules="[{ required: true, pattern: /^1\d{10}/, message: '请输入正确的手机号' }]"
         />
         <van-field
           key="4"
-          v-model="code"
+          v-model="password"
           label-width="90px"
+          type="password"
           clearable
-          label="验证码"
-          placeholder="请输入验证码"
-          :rules="[{ required: true, message: '请输入验证码' }]"
+          :label="$t('password')"
+          placeholder="请输入密码"
         >
-          <template #button>
+          <!-- <template #button>
             <span :class="{
               'code-show': num === 60
             }" @click="clickCode">{{codeTemplat}}</span>
-          </template>
+          </template> -->
         </van-field>
         <div class="agreement" v-if="status === 0">
           <van-checkbox
@@ -107,8 +106,8 @@
     <div style="margin: 0 20px">
       <van-button type="primary" size="large" round @click="loginSubmit">{{$t('login')}}</van-button>
     </div>
-    <div class="flex-center ellipsis-1 fs-32 tourise-color" @click="silentLogin">游客身份浏览></div>
-    <div class="flex-center ellipsis-1 fs-32 tourise-color" @click="resetData">重置data数据></div>
+    <div class="flex-center ellipsis-1 fs-32 tourise-color" @click="silentLogin">{{$t('view')}}></div>
+    <div class="flex-center ellipsis-1 fs-32 tourise-color" @click="resetData">{{$t('resetData')}}></div>
 
     <van-popup v-model="openThemeShow" position="right" :style="{ height: '100%' }">
       <div
@@ -131,6 +130,7 @@
 <script>
 import { Form, Field, Checkbox, Button, Popup, Toast, Icon } from 'vant'
 import { mapMutations } from 'vuex'
+import { getAlluser, saasInfo, userLogin, changeLang, changeTheme } from '@/api/saasInfo'
 export default {
   name: 'Login',
   components: {
@@ -144,12 +144,16 @@ export default {
   },
   data () {
     return {
+      userId: '',
+      userConfigInfo: {},
       CONFIG,
       themeColors: ['#4DC2A5', '#EE9E09', '#72AEE6'],
       openThemeShow: false,
       fullPath: '/home',
       status: 1,
       num: 60, // 倒计时
+      username: '', // 用户名
+      password: '', // 密码
       cardCode: '', // 兑换码
       name: '', // 姓名
       phone: '', // 手机号
@@ -182,7 +186,7 @@ export default {
       return style
     },
     language () {
-      return this.$store.state.lang
+      return this.$store.state.language
     },
     ...mapMutations([
       'SET_THEMECOLOR'
@@ -218,14 +222,26 @@ export default {
   },
   methods: {
     // 中英文切换
-    clickLanguage () {
+    async clickLanguage () {
       const lang = this.language === 'en' ? 'zh' : 'en'
       this.$store.commit('SET_LANG', lang)
+      await changeLang({
+        userId: this.userId,
+        lang: lang
+      })
+      window['z-ui'].Locale.use({
+        lang: this.$store.state.language,
+        currency: '￥'
+      })
     },
     // 换肤
-    changeSkip (color) {
+    async changeSkip (color) {
       this.$store.commit('SET_THEMECOLOR', color)
       this.openThemeShow = false
+      await changeTheme({
+        userId: this.userId,
+        theme: color
+      })
     },
     // 游客静默登录
     silentLogin () {
@@ -243,12 +259,49 @@ export default {
       window.open(`${location.origin}/${name}.pdf`)
     },
     // 登陆
-    loginSubmit () {
-      Toast(this.$t('msg', { a: '手机号', b: '验证码', c: 'alwa：' }))
-      this.$router.push('/home')
+    async loginSubmit () {
+      if (this.status === 1) {
+        if (this.username === '' || this.password === '') {
+          Toast(this.$t('msg', { a: '用户名', b: '密码', c: `${this.name}` }))
+        } else {
+          const res = await userLogin({
+            username: this.username,
+            password: this.password
+          })
+          if (res.status === 200) {
+            Toast(res.message)
+            this.$router.push('/home')
+          } else {
+            Toast(res.message)
+          }
+        }
+      }
     }
   },
-  mounted () {
+  async mounted () {
+    const res = await getAlluser()
+    console.log(res, 111)
+    if (res.data) {
+      const user = res.data[0]
+      this.username = user.username
+      this.password = user.password
+      this.name = user.username
+      this.userId = user.userId
+      const res2 = await saasInfo({
+        userId: this.userId
+      })
+      // 用户配置信息
+      this.userConfigInfo = res2.data
+      // 多语言
+      if (this.userConfigInfo.lang) {
+        this.$store.commit('SET_LANG', this.userConfigInfo.lang)
+      }
+      // 主题
+      if (this.userConfigInfo.theme) {
+        this.$store.commit('SET_THEMECOLOR', this.userConfigInfo.theme)
+      }
+    }
+
     const { status } = this.$route.query
     if (status) this.status = Number(status)
   }

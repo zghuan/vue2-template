@@ -20,7 +20,7 @@ module.exports = {
     config.externals = {
       vue: 'Vue',
       // vuex: 'Vuex',
-      uw: 'z-uw',
+      zui: 'z-ui',
       axios: 'axios'
       // 'vue-router': 'VueRouter'
     }

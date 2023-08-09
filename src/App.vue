@@ -26,7 +26,7 @@ export default {
     })
     this.$log({
       tit: '当前语言',
-      cont: this.$store.state.lang
+      cont: this.$store.state.language
     })
     this.$log({
       tit: '当前主题',

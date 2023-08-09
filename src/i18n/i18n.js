@@ -9,13 +9,13 @@ export default class I18n {
       let splitStr = ''
       if (str.indexOf('.') > -1) {
         const arr = str.split('.')
-        let obj = { ...this.options.messages[store.state.lang] }
+        let obj = { ...this.options.messages[store.state.language] }
         arr.forEach(e => {
           obj = obj[e]
         })
         splitStr = obj
       } else {
-        splitStr = this.options.messages[store.state.lang][str]
+        splitStr = this.options.messages[store.state.language][str]
       }
       if (!splitStr) return str
       if (splitStr && Object.prototype.toString.call(splitStr) === '[object Object]') {
