@@ -25,7 +25,7 @@ jobs:
           node-version: "14.x"
       - run: node -v
       - run: npm install # 依赖
-      - run: npm run pre-build # 预渲染构建命令
+      - run: npm run build # 构建命令
       - name: Deploy # 部署
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
