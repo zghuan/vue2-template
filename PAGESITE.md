@@ -1,49 +1,43 @@
 # github-pages 静态站点部署
 
-## 预渲染注意事项
+## 注意事项
 
-### 1. 去掉全局变量，不然会报错
+### 静态部署不支持服务器配置，所以 `router` 模式要改为 hash ` mode:'hash'`
 
-### 2. 根目录增加.npmrc 文件，不然依赖不到@dreysolano/prerender-spa-plugin
+## 操作步骤
 
-## 1. 安装依赖
+1. 在 github 除了主分支 `mian` 外，额外创建一个空分支如 `uat` 用于存放 github 打包后的文件
+2. 根目录增加文件 `.github/workflows/*.yml` 用于激活 `github-pages` 流水线
 
-```js
-yarn add @dreysolano/prerender-spa-plugin --dev
+```
+on:
+  push:
+    branches:
+      - main # 这里只配置了main分支，所以只有推送main分支才会触发以下任务
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14.x"
+      - run: node -v
+      - run: npm install # 依赖
+      - run: npm run pre-build # 预渲染构建命令
+      - name: Deploy # 部署
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: uat # 部署后提交到那个分支，跟步骤1对应
+          folder: dist # 这里填打包好的目录名称
 ```
 
-## 2. vue.config.js 创建 prerender 插件
+3. 在 `github` 你的项目里，打开 `setting` -> `pages` -> `Build and deployment`  
+   Branch 里的分支改为 `uat` 点击 `Save` 保存
 
-```js
-const path = require("path");
-const PrerenderSPAPlugin = require("PrerenderSPAPlugin");
-const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
-configureWebpack: {
-  plugins: [
-    new PrerenderSPAPlugin({
-      staticDir: path.join(__dirname, "dist"),
-      routes: ["/", "/about"], // 你需要预渲染的路由
-      renderer: new Renderer({
-        inject: {
-          _m: "prerender",
-        },
-        // 渲染时显示浏览器窗口，调试时有用
-        headless: false,
-        // 等待触发目标时间后，开始预渲染
-        renderAfterDocumentEvent: "render-event",
-      }),
-    }),
-  ];
-}
-```
+4. 提交代码到 github `main` 主分支 github 服务器变会自动进行打包部署  
+   访问地址在你刚配置的 `pages` 页面点击 `Visit site`
 
-## 3. main.js mounted 调用自定义事件
-
-```js
-new Vue({
-  mounted() {
-    // 触发 renderAfterDocumentEvent
-    document.dispatchEvent(new Event("render-event"));
-  },
-}).$mount("#app");
-```
+![image](./site1.png)  
+![image](./site2.png)

@@ -1,3 +1,9 @@
+## 预渲染注意事项
+
+### 1. 去掉全局变量，不然会报错
+
+### 2. 根目录增加.npmrc 文件，不然依赖不到@dreysolano/prerender-spa-plugin
+
 # 预渲染步骤
 
 ## 1. 安装依赖
@@ -41,11 +47,3 @@ new Vue({
   },
 }).$mount("#app");
 ```
-
-## 预渲染注意事项
-
-### 1. 去掉全局变量，不然会报错
-
-### 2. 根目录增加.npmrc 文件，不然依赖不到@dreysolano/prerender-spa-plugin
-
-### 3.
