@@ -1,24 +1,34 @@
-# vue2-test-eslint
+# vue2-template-saas 移动端 saas 模板
 
-## Project setup
+#### 内置包含了 主题化/国际化/第三方定制页模板
+
+#### 实现简单的插件 `babel` `loader` `webpack plugin`
+
+#### 预渲染 `pre-render` 静态站点部署 `github-pages`
+
+### 安装依赖
+
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 运行项目
+
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### 普通构建
+
 ```
 yarn build
 ```
 
-### Lints and fixes files
+### 预渲染构建
+
 ```
-yarn lint
+yarn pre-build
 ```
-### 测试
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+1. [pre-render 预渲染注意事项](PRERENDER.md)
+2. [github-pages 静态站点部署注意事项](PAGESITE.md)

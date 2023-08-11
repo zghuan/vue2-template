@@ -14,7 +14,8 @@ module.exports = {
   },
   rules: {
     'vue/multi-word-component-names': 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'space-before-function-paren': 0
   },
   // 全局变量跳过验证
   globals: {

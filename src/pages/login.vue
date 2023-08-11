@@ -108,7 +108,6 @@
     </div>
     <div class="flex-center ellipsis-1 fs-32 tourise-color" @click="silentLogin">{{$t('view')}}></div>
     <div class="flex-center ellipsis-1 fs-32 tourise-color" @click="resetData">{{$t('resetData')}}></div>
-
     <van-popup v-model="openThemeShow" position="right" :style="{ height: '100%' }">
       <div
       :key="item.id"
@@ -146,7 +145,6 @@ export default {
     return {
       userId: '',
       userConfigInfo: {},
-      CONFIG,
       themeColors: ['#4DC2A5', '#EE9E09', '#72AEE6'],
       openThemeShow: false,
       fullPath: '/home',
@@ -229,10 +227,12 @@ export default {
         userId: this.userId,
         lang: lang
       })
-      window['z-ui'].Locale.use({
-        lang: this.$store.state.language,
-        currency: '￥'
-      })
+      if (window['z-ui']) {
+        window['z-ui'].Locale.use({
+          lang: this.$store.state.language,
+          currency: '￥'
+        })
+      }
     },
     // 换肤
     async changeSkip (color) {
@@ -279,8 +279,9 @@ export default {
     }
   },
   async mounted () {
+    console.log(CONFIG)
     const res = await getAlluser()
-    console.log(res, 111)
+    console.log(res, 'res')
     if (res.data) {
       const user = res.data[0]
       this.username = user.username

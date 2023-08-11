@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <z-nav-bar title="我是zui组件导航栏" navBarType="search"></z-nav-bar>
-    <!-- <div>全局变量：{{CONFIG.name}}</div> -->
     <button @click="go('/layout')">布局</button>
     <button @click="go('/topics')" >观察者模式</button>
   </div>
@@ -18,7 +17,6 @@ export default {
   data () {
     return {
       show: false,
-      // CONFIG,
       originObj: {
         a: 1,
         b: {

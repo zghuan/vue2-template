@@ -13,9 +13,12 @@ const i18n = new I18n({
 Vue.prototype.$t = (str, params) => {
   return i18n.$t(str, params)
 }
-// 组件库统一语言
-window['z-ui'].Locale.use({
-  lang: store.state.language,
-  currency: '￥'
-})
+if (window['z-ui']) {
+  // 组件库统一语言
+  window['z-ui'].Locale.use({
+    lang: store.state.language,
+    currency: '￥'
+  })
+}
+
 export default i18n

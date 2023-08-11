@@ -28,7 +28,7 @@ Vue.use(zui)
 // 根实例
 export default new Vue({
   el: '#app',
-  data () {
+  data() {
     return {
       name: 'alwa'
     }
@@ -37,7 +37,7 @@ export default new Vue({
   store,
   i18n,
   render: h => h(App),
-  mounted () {
+  mounted() {
     // 触发 renderAfterDocumentEvent
     document.dispatchEvent(new Event('render-event'))
   }

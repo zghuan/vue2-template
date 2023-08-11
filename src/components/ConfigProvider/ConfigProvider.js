@@ -3,7 +3,7 @@ export default {
   abstract: true, // 抽象组件
   props: ['name'],
   created () {
-    console.log('name:', this.name)
+    console.log('props name:', this.name)
   },
   render (h) {
     const slot = this.$slots.default && this.$slots.default[0]

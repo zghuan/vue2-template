@@ -1,11 +1,10 @@
 const FileListPlugin = require('./webpackPlugin/fileList.js')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require('path')
 const PrerenderSPAPlugin = require('@dreysolano/prerender-spa-plugin')
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
-
-console.log(process.env.MODE)
-
+const CONFIG = require('./public/globalConfig.js')
+console.log('正在读取全局配置文件...', CONFIG)
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/vue2-template/' : '/',
   lintOnSave: process.env.NODE_ENV !== 'production',
@@ -34,8 +33,8 @@ module.exports = {
       new FileListPlugin({
         filename: 'alwa.md',
         exclude: ['html'] // 排除记录的文件
-      }),
-      new CleanWebpackPlugin()
+      })
+      // new CleanWebpackPlugin()
     )
     if (process.env.MODE === 'pre') {
       config.plugins.push(
@@ -70,6 +69,17 @@ module.exports = {
         ]
         return args
       })
+    }
+    // 预渲染是https，加载不了http阻塞
+    if (process.env.MODE !== 'pre') {
+      config.plugin('html')
+        .tap(args => {
+          args[0].cdn = {
+            css: CONFIG.zuiCdn.css,
+            js: CONFIG.zuiCdn.js
+          }
+          return args
+        })
     }
   },
   css: {
