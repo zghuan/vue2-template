@@ -14,10 +14,11 @@ Vue.prototype.$t = (str, params) => {
   return i18n.$t(str, params)
 }
 if (window['z-ui']) {
-  // 组件库统一语言
   window['z-ui'].Locale.use({
+    // 组件库统一语言
     lang: store.state.language,
-    currency: '￥'
+    currency: '￥',
+    colour: store.state.themeColor
   })
 }
 

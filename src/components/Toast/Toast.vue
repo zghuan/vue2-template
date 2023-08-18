@@ -53,9 +53,14 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.hide()
       }, 2000)
+    })
+    // 通过$once来监听定时器，在beforeDestroy钩子可以被清除。
+    this.$once('hook:beforeDestroy', () => {
+      console.log('清除定时器')
+      clearInterval(this.timer)
     })
   },
   methods: {

@@ -100,7 +100,7 @@ export function deepClone (originObj) {
 export function debounce (fn, delay) {
   let timer = null
   return function () {
-    if (timer !== null) {
+    if (timer) {
       clearTimeout(timer)
     }
     timer = setTimeout(() => {
@@ -111,15 +111,17 @@ export function debounce (fn, delay) {
 
 // 节流-减少一段时间内事件的触发频率
 export function throttle (fn, delay) {
-  let flag = true
+  let timer = null
   return function () {
-    if (flag) {
-      setTimeout(() => {
-        fn.apply(this, arguments)
-        flag = true
-      }, delay)
-    }
-    flag = false
+    // 这儿是重点如果时间没到那么timer就不为null就会返回不会往下执行
+    if (timer) {
+      return
+    };
+    timer = setTimeout(() => {
+      // 时间到了timer被设置为null就走到这儿来了就会执行
+      fn.apply(this, arguments)
+      timer = null
+    }, delay)
   }
 }
 
