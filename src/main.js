@@ -26,6 +26,7 @@ Vue.use(plugin)
 const zui = 'z-ui'
 Vue.use(zui)
 // 根实例
+
 export default new Vue({
   el: '#app',
   data() {

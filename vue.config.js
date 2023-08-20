@@ -71,12 +71,12 @@ module.exports = {
       })
     }
     // 预渲染是https，加载不了http阻塞
-    if (process.env.MODE !== 'pre') {
+    if (process.env.MODE !== 'pre' && process.env.NODE_ENV === 'production') {
       config.plugin('html')
         .tap(args => {
           args[0].cdn = {
-            css: CONFIG.zuiCdn.css,
-            js: CONFIG.zuiCdn.js
+            css: `${CONFIG.zuiCdn.css}?v=${new Date().getTime()}`,
+            js: `${CONFIG.zuiCdn.js}?v=${new Date().getTime()}`
           }
           return args
         })

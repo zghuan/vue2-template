@@ -242,6 +242,11 @@ export default {
         userId: this.userId,
         theme: color
       })
+      if (window['z-ui']) {
+        window['z-ui'].Locale.use({
+          colour: this.$store.state.themeColor
+        })
+      }
     },
     // 游客静默登录
     silentLogin () {

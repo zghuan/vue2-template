@@ -8,6 +8,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
     />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <!-- <link rel="stylesheet" href="http://localhost:8080/lib/index.css?v=0.1.1" /> -->
     <link
       rel="stylesheet"
       href="<%= htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css %>"
@@ -20,11 +21,10 @@
     </style>
   </head>
   <body>
-    <script src="https://d.zowoyoo.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
-    <!-- <script src="https://d.zowoyoo.com/ajax/libs/vue/2.5.16/vuex.min.js"></script>
-    <script src="https://d.zowoyoo.com/ajax/libs/vue/2.5.16/vue-router.min.3.0.3.js"></script> -->
-    <script src="https://d.zowoyoo.com/ajax/libs/vue/2.5.16/axios.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="<%= htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js %>"></script>
+    <!-- <script src="http://localhost:8080/lib/z-ui.js?v=0.1.1"></script> -->
     <script src="./globalConfig.js"></script>
     <noscript>
       <strong

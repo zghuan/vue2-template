@@ -1,8 +1,10 @@
 <template>
   <div class="home">
     <z-nav-bar title="我是zui组件导航栏" navBarType="search"></z-nav-bar>
+
     <button @click="go('/layout')">布局</button>
     <button @click="go('/topics')" >观察者模式</button>
+    <z-detail-button btn-text="zui组件底部按钮"></z-detail-button>
   </div>
 </template>
 <script>
@@ -12,7 +14,6 @@ import { Sones6, Sones5 } from '../interview/extend'
 export default {
   name: 'Home',
   components: {
-
   },
   data () {
     return {

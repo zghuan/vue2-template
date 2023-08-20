@@ -17,8 +17,7 @@ if (window['z-ui']) {
   window['z-ui'].Locale.use({
     // 组件库统一语言
     lang: store.state.language,
-    currency: '￥',
-    colour: store.state.themeColor
+    currency: '￥'
   })
 }
 
