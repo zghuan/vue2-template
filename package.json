@@ -40,7 +40,7 @@
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
-    "pre-commit": "node zgh.js && lint-staged",
+    "pre-commit": "lint-staged",
     "pre-push": "npm version patch"
   },
   "lint-staged": {
