@@ -71,7 +71,7 @@ module.exports = {
       })
     }
     // 预渲染是https，加载不了http阻塞
-    if (process.env.MODE !== 'pre' && process.env.NODE_ENV === 'production') {
+    if (process.env.MODE !== 'pre') {
       config.plugin('html')
         .tap(args => {
           args[0].cdn = {
