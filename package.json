@@ -40,7 +40,7 @@
     "vue-template-compiler": "2.6.12"
   },
   "gitHooks": {
-    "pre-commit": " lint-staged",
+    "pre-commit": "echo '啊' && lint-staged",
     "pre-push": "npm version patch"
   },
   "lint-staged": {
