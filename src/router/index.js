@@ -33,6 +33,11 @@ export default new VueRouter({
       component: () => import(/* webpackChunkName: "home" */ '../pages/layout.vue')
     },
     {
+      path: '/fileUpload',
+      name: '断点续传',
+      component: () => import(/* webpackChunkName: "home" */ '../pages/fileUpload.vue')
+    },
+    {
       path: '/topics',
       name: '发布大厅',
       component: () => import(/* webpackChunkName: "topics" */ '../pages/topics.vue')

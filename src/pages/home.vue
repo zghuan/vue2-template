@@ -3,6 +3,7 @@
     <z-nav-bar title="我是zui组件导航栏" navBarType="search"></z-nav-bar>
     <button @click="go('/layout')">布局</button>
     <button @click="go('/topics')" >观察者模式</button>
+    <button @click="go('/fileUpload')" >断点续传</button>
     <z-detail-button btn-text="zui组件底部按钮"></z-detail-button>
   </div>
 </template>
