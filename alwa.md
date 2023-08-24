@@ -1,7 +1,7 @@
 In this build:
 
 - css/app.8cb35ab2.css
-- js/app.ce465daf.js
+- js/app.04e89aaf.js
 - css/login.bcce21b2.css
 - js/login.a0cf2741.js
 - css/home.3395a531.css
