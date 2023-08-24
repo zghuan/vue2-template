@@ -32,3 +32,4 @@ yarn pre-build
 
 1. [pre-render 预渲染注意事项](PRERENDER.md)
 2. [github-pages 静态站点部署注意事项](PAGESITE.md)
+3. [yorkie 使用步骤](YORKIE.md)
