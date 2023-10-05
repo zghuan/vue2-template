@@ -2,7 +2,7 @@ import store from '../store'
 /* eslint-disable no-undef */
 axios.defaults.retry = 2
 axios.defaults.retryDelay = 1000
-const baseURL = process.env.NODE_ENV === 'production' ? CONFIG.apiUrl : 'http://localhost:3000'
+const baseURL = process.env.NODE_ENV === 'production' ? CONFIG.apiUrl : 'http://localhost:3000/api'
 // eslint-disable-next-line
 const service = axios.create({
   baseURL,

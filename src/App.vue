@@ -13,7 +13,7 @@ export default {
   components: {
     configProvider
   },
-  created () {
+  created() {
     // 测试babel
     debugger
     this.$log({

@@ -6,8 +6,9 @@ const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 const CONFIG = require('./public/globalConfig.js')
 console.log('正在读取全局配置文件...', CONFIG)
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/vue2-template/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/vue2/' : '/',
   lintOnSave: process.env.NODE_ENV !== 'production',
+  outputDir: 'vue2',
   productionSourceMap: false,
   devServer: {
     host: '0.0.0.0',
@@ -25,9 +26,7 @@ module.exports = {
     }
     config.module.rules.push({
       test: /\.md$/,
-      use: [
-        './loader/md-loader.js'
-      ]
+      use: ['./loader/md-loader.js']
     })
     config.plugins.push(
       new FileListPlugin({
@@ -54,7 +53,7 @@ module.exports = {
       )
     }
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
     if (process.env.NODE_ENV === 'production') {
@@ -72,14 +71,13 @@ module.exports = {
     }
     // 预渲染是https，加载不了http阻塞
     if (process.env.MODE !== 'pre') {
-      config.plugin('html')
-        .tap(args => {
-          args[0].cdn = {
-            css: `${CONFIG.zuiCdn.css}?v=${new Date().getTime()}`,
-            js: `${CONFIG.zuiCdn.js}?v=${new Date().getTime()}`
-          }
-          return args
-        })
+      config.plugin('html').tap((args) => {
+        args[0].cdn = {
+          css: `${CONFIG.zuiCdn.css}?v=${new Date().getTime()}`,
+          js: `${CONFIG.zuiCdn.js}?v=${new Date().getTime()}`
+        }
+        return args
+      })
     }
   },
   css: {

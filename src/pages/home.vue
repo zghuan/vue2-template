@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <z-nav-bar title="我是zui组件导航栏" navBarType="search"></z-nav-bar>
+    <z-nav-bar title="我是zui组件导航栏1" navBarType="search"></z-nav-bar>
     <button @click="go('/layout')">布局</button>
     <button @click="go('/topics')" >观察者模式</button>
     <button @click="go('/fileUpload')" >断点续传</button>
@@ -113,7 +113,7 @@ export default {
 </script>
 <style lang="less" scoped>
   .home {
-    max-height: 100vh;
+     max-height: 100vh;
     padding: 10px;
   }
 </style>
