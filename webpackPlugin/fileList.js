@@ -1,13 +1,13 @@
 // 手写一个webpack插件，记录文件列表输出到目标文件夹
 class FileListPlugin {
-  constructor (options) {
+  constructor(options) {
     this.filename = options.filename
     this.exclude = options.exclude
   }
 
-  apply (compiler) {
+  apply(compiler) {
     compiler.hooks.emit.tap('FileListPlugin', (compilation) => {
-      console.log('FileListPlugin 构建过程开始！"')
+      // console.log('FileListPlugin 构建过程开始！"')
       // 在生成文件中，创建一个头部字符串：
       let filelist = 'In this build:\n\n'
 
@@ -28,6 +28,10 @@ class FileListPlugin {
           return filelist.length
         }
       }
+    })
+    compiler.hooks.afterEmit.tap('FileListPlugin', (compilation) => {
+      // 在这里编写你要执行的JavaScript代码
+      console.log(compilation.assets, '构建完成，这是当前的包')
     })
   }
 }
